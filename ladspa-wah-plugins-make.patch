@@ -1,0 +1,31 @@
+--- WAH-plugins-0.1.0/Makefile.orig	2014-03-09 12:59:20.000000000 +0100
++++ WAH-plugins-0.1.0/Makefile	2022-01-27 21:10:26.642027380 +0100
+@@ -19,9 +19,10 @@
+ # --------------------------------------------------------------------------
+ 
+ 
++CXX = g++
+ CPPFLAGS += -I. -D_REENTRANT
+-CXXFLAGS += -ffast-math -fPIC -Wall -O3
+-
++CXXFLAGS += -ffast-math -fPIC -Wall
++LADSPA_LIB_DIR = /usr/lib/ladspa
+ 
+ all:	autowah.so
+ 
+@@ -30,13 +31,13 @@ WAHPLUGINS_O = wahplugins.o autowah.o
+ WAHPLUGINS_H = ladspaplugin.h autowah.h
+ 
+ autowah.so:	$(WAHPLUGINS_O)
+-	g++ -shared  -o autowah.so $(WAHPLUGINS_O)
++	$(CXX) $(LDFLAGS) -shared  -o autowah.so $(WAHPLUGINS_O)
+ 
+ $(WAHPLUGINS_O):	$(WAHPLUGINS_H)
+ 
+ 
+ install:	all
+-	cp  *.so /usr/lib/ladspa
++	cp -p  *.so $(DESTDIR)$(LADSPA_LIB_DIR)
+ 
+ clean:
+ 	/bin/rm -f *~ *.o *.so
