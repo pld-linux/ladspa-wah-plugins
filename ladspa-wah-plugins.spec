@@ -28,7 +28,7 @@ Wtyczki LADSPA WAH (pedał wah).
 
 %build
 CPPFLAGS="%{rpmcppflags}" \
-CXXFLAGS="%{rpmcppflags}" \
+CXXFLAGS="%{rpmcxxflags}" \
 LDFLAGS="%{rpmldflags}" \
 %{__make} \
 	CXX="%{__cxx}"
